@@ -19,6 +19,7 @@ class RestaurantTest {
     @Spy
     Restaurant restaurant;
     List<Item> expectedMenu = new ArrayList<Item>();
+    List<Item> orderedMenu = new ArrayList<Item>();
 
     @BeforeEach
     void initialize_restaurant(){
@@ -72,7 +73,7 @@ class RestaurantTest {
         expectedMenu.add(new Item("Sweet corn soup",119));
         expectedMenu.add(new Item("Vegetable lasagne", 269));
         List<Item> actualMenu = restaurant.getMenu();
-        assertEquals(actualMenu.toString(), expectedMenu.toString());
+        assertEquals(expectedMenu.toString(), actualMenu.toString());
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
@@ -80,16 +81,45 @@ class RestaurantTest {
 
     @Test
     public void order_total_should_return_zero_when_no_items_are_selected(){
-
+        assertEquals(0,restaurant.getOrderTotal(orderedMenu));
     }
 
     @Test
     public void selecting_item_from_menu_should_return_increased_order_total(){
+        // No Items in order Menu
+        int initialTotal = restaurant.getOrderTotal(orderedMenu);
+        orderedMenu.add(new Item("Sweet corn soup",119));
 
+        // First Item added to Order Menu
+        int intermediateTotal = restaurant.getOrderTotal(orderedMenu);
+
+        // Second Item added to Order Menu
+        orderedMenu.add(new Item("Vegetable lasagne", 269));
+        int finalTotal = restaurant.getOrderTotal(orderedMenu);
+
+        assertEquals(0,initialTotal);
+        assertEquals(119,intermediateTotal);
+        assertEquals(388,finalTotal);
     }
 
     @Test
     public void deselecting_item_from_menu_should_return_decreased_order_total(){
+        // No Items in order Menu
+        int initialTotal = restaurant.getOrderTotal(orderedMenu);
+
+        //Two Item added to order Menu
+        orderedMenu.add(new Item("Sweet corn soup",119));
+        orderedMenu.add(new Item("Vegetable lasagne", 269));
+        int intermediateTotal = restaurant.getOrderTotal(orderedMenu);
+
+        //Removed "Vegetable lasagne" from order Menu
+        orderedMenu.remove(1);
+        int finalTotal = restaurant.getOrderTotal(orderedMenu);
+
+
+        assertEquals(0,initialTotal);
+        assertEquals(388,intermediateTotal);
+        assertEquals(119,finalTotal);
 
     }
 
