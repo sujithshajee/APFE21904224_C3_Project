@@ -75,4 +75,23 @@ class RestaurantTest {
         assertEquals(actualMenu.toString(), expectedMenu.toString());
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER TOTAL<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void order_total_should_return_zero_when_no_items_are_selected(){
+
+    }
+
+    @Test
+    public void selecting_item_from_menu_should_return_increased_order_total(){
+
+    }
+
+    @Test
+    public void deselecting_item_from_menu_should_return_decreased_order_total(){
+
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER TOTAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
